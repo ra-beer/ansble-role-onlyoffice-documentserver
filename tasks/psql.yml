@@ -1,0 +1,24 @@
+---
+- name: PostgreSQL packages are installed
+  package:
+    name:
+      - "postgresql"
+      - "python3-psycopg2"
+
+- name: onlyoffice role is created.
+  postgresql_user:
+    name: "{{ db_user }}"
+    password: "{{ db_pwd }}"
+    encrypted: yes
+    state: present
+    role_attr_flags: CREATEDB
+  become_user: postgres
+  become: yes
+
+- name: onlyoffice database is created.
+  postgresql_db:
+    name: "{{ db_name }}"
+    state: present
+    owner: "{{ db_user }}"
+  become_user: postgres
+  become: yes

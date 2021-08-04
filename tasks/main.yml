@@ -1,0 +1,37 @@
+---
+# tasks file for onlyoffice
+- name: update the package manager cache
+  apt:
+    update_cache: true
+
+- include: setup.yml
+
+- include: psql.yml
+
+- include: rabbitmq.yml
+
+- name: install nginx extras
+  package:
+    name: nginx-extras
+    state: present
+
+# without using https
+- name: change the port for onlyoffice
+  shell:
+    cmd: "echo onlyoffice-documentserver onlyoffice/ds-port select {{ onlyoffice_port_number }} | sudo debconf-set-selections"
+  when: https == "no"
+
+- include: install.yml
+
+# changing the port by using https
+- name: change the port with using https
+  block:
+    - name: install certbot
+      package:
+        name: certbot
+        state: present
+
+    - name: run script for specifying your email and domain
+      shell:
+        cmd: bash /usr/bin/documentserver-letsencrypt.sh {{ email }} {{ domain }}
+  when: https == "yes"

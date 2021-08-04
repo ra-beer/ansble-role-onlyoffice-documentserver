@@ -1,0 +1,12 @@
+---
+# defaults file for onlyoffice
+
+onlyoffice_group: onlyoffice
+onlyoffice_user: onlyoffice
+onlyoffice_port_number: 80
+db_name: onlyoffice
+db_user: onlyoffice
+# db_pwd: set this var at runtime for more secrurity
+https: "yes"
+email: "your@email.de"
+domain: "your-domain.de"

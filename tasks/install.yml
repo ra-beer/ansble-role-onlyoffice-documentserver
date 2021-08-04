@@ -1,0 +1,32 @@
+---
+- name: add the gpg key
+  apt_key:
+    keyserver: hkp://keyserver.ubuntu.com:80
+    id: CB2DE8E5
+
+- name: add the onlyoffice doc repo
+  apt_repository:
+    repo: "deb https://download.onlyoffice.com/repo/debian squeeze main"
+    state: present
+
+- name: update the package manager cache
+  apt:
+    update_cache: true
+
+- name: set db pwd for installation
+  debconf:
+    name: onlyoffice-documentserver
+    question: onlyoffice/db-pwd
+    value: "{{ db_pwd }}"
+    vtype: password
+  no_log: true
+
+- name: install mscorefonts
+  package: 
+    name: ttf-mscorefonts-installer
+    state: present
+  
+- name: install onlyoffice
+  package:
+    name: onlyoffice-documentserver
+    state: present

@@ -1,0 +1,17 @@
+---
+- name: create onlyoffice group
+  group:
+    state: present
+    name: "{{ onlyoffice_group }}"
+    system: yes
+
+- name: create onlyoffice user
+  user:
+    state: present
+    name: "{{ onlyoffice_user }}"
+    group: "{{ onlyoffice_group }}"
+
+- name: ensure nginx is installed
+  package:
+    name: nginx
+    state: present

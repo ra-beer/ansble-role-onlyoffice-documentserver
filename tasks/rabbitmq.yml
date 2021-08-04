@@ -1,0 +1,15 @@
+---
+- name: make sure erlang is installed
+  package:
+    name: erlang
+    state: present
+
+- name: make sure that rabbitmq is installed
+  package:
+    name: rabbitmq-server
+    state: present
+
+- name: start rabbitmq
+  service:
+    name: rabbitmq-server
+    state: started
