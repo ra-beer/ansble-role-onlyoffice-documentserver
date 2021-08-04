@@ -7,6 +7,7 @@ Useable with and without https.
 Requirements
 ------------
 
+```
 only tested on:
 Ubuntu 20.04
 nginx
@@ -14,10 +15,12 @@ postgresql
 rabbitmq
 
 root-access
+```
 
 Role Variables
 --------------
 
+```
 onlyoffice_group: onlyoffice
 onlyoffice_user: onlyoffice
 onlyoffice_port_number: 80
@@ -27,6 +30,7 @@ db_user: onlyoffice
 https: "yes"
 email: "your@email.de"
 domain: "your-domain.de"
+```
 
 Example Playbook
 ----------------
